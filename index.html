@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.css" />
+		<title>Happy Birthday</title>
+	</head>
+	<body style="position: relative">
+		<div class="envelope new">
+			<div class="front">
+				<div class="mail">
+					<p>Happy Birthday</p>
+					<p>Ấn đây :p</p>
+				</div>
+			</div>
+			<div class="back">
+				<div class="letter" id="letter">
+					<p>Chúc em sinh nhật vui vẻ, luôn luôn xinh đẹp và may mắn</p>
+					<p style="margin-top: 10px">hmm, hơi muộn nhể, nhưng mà chọn quà không :))</p>
+					<p>Happy Birth Day BLUE</p>
+
+					<div class="box" style="position: relative">
+						<div class="cake">
+							<div class="candle">
+								<div class="fire"></div>
+							</div>
+						</div>
+					</div>
+					<button
+						id="yes"
+						style="
+							position: absolute;
+							padding: 8px 30px;
+							border: none;
+							background-color: green;
+							color: white;
+							text-transform: uppercase;
+							border-radius: 5px;
+							cursor: pointer;
+						"
+					>
+						Yeppp
+					</button>
+					<button
+						id="no"
+						style="
+							position: absolute;
+							padding: 8px 30px;
+							border: none;
+							background-color: red;
+							color: white;
+							text-transform: uppercase;
+							border-radius: 5px;
+							right: 30px;
+							cursor: pointer;
+						"
+					>
+						Ko!
+					</button>
+				</div>
+				<div class="flip left-flip"></div>
+				<div class="flip right-flip"></div>
+				<div class="flip bottom-flip"></div>
+				<div class="flip top-flip"></div>
+			</div>
+		</div>
+		<div
+			id="luckySpin"
+			style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none"
+		>
+			<div class="m-game">
+				<div class="m-game__start"><img src="https://w.ladicdn.com/source/spin-btn1.svg" alt="" /></div>
+				<div class="m-game__wrapper">
+					<img class="m-game__bg" src="https://w.ladicdn.com/source/spin-bg6.svg" alt="" />
+					<div>
+						<div class="m-game__text">Trà sữa :p</div>
+						<div class="m-game__text">
+							Chúc em may <br />
+							mắn lần sau :))
+						</div>
+						<div class="m-game__text">
+							Làm 3 việc<br />
+							cho em
+						</div>
+						<div class="m-game__text">Đi ăn</div>
+						<div class="m-game__text">Xem phim</div>
+						<div class="m-game__text">
+							Món quà <br />
+							em chọn
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<audio controls autoplay style="display: none" id="audio">
+			<source src="horse.ogg" type="audio/ogg" />
+			<source src="./happybirthday.mp3" type="audio/mpeg" />
+			Your browser does not support the audio element.
+		</audio>
+		<div class="backdrop"></div>
+		<div class="result-game">
+			<p style="font-size: 24px; font-weight: bold; color: pink">
+				ahihi, chúc mừng em được 1 vé xem phim vào tối thứ 6 tuần này cùng anh nha, 7h anh qua đón :))
+			</p>
+			<img src="./movie.jpg" style="max-width: 500px" alt="" />
+		</div>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="./script.js"></script>
+	<script>
+		$("#yes").on("mouseover", function () {
+			$("#yes").animate(
+				{
+					top: Math.random() * $("#letter").innerHeight() + "px",
+					left: Math.random() * $("#letter").innerWidth() + "px",
+				},
+				"medium"
+			);
+		});
+
+		$("#no").on("click", function () {
+			$("#letter").css("display", "none");
+			$("#luckySpin").css("display", "block");
+		});
+
+		$(function () {
+			var $hat = $(".m-game__wrapper");
+			var token = true;
+
+			$(".m-game__start").on("click", function () {
+				if (!token) return;
+				token = false;
+
+				var oldDeg = $hat.data("rotate") ? $hat.data("rotate") : 0;
+
+				var deg = Math.floor(Math.random() * 360) + 1080 + oldDeg;
+
+				$hat.data("rotate", deg);
+				$hat.css("transform", `rotate(${deg}deg)`);
+
+				setTimeout(function () {
+					token = true;
+					calcResult(deg);
+				}, 7000);
+			});
+		});
+
+		function calcResult(deg) {
+			// alert("Quay chơi thôi :))");
+			$(".result-game").css("display", "block");
+			$(".backdrop").css("display", "block");
+		}
+	</script>
+</html>
